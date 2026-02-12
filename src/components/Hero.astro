@@ -1,0 +1,43 @@
+---
+import { siteTitle, siteSubtitle, authors, links } from "../content/site.config";
+import ButtonLink from "./ButtonLink.astro";
+---
+
+<section class="relative pt-32 pb-20 overflow-hidden">
+	<!-- Background glow -->
+	<div class="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-accent-cyan opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+		<!-- Title -->
+		<div class="text-center mb-8">
+			<h1 class="text-6xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-brand-text-primary via-brand-accent-cyan to-brand-accent-indigo bg-clip-text text-transparent">
+				{siteTitle}
+			</h1>
+			<p class="text-2xl md:text-3xl text-brand-text-secondary font-light max-w-4xl mx-auto">
+				{siteSubtitle}
+			</p>
+		</div>
+
+		<!-- Authors -->
+		<div class="text-center mb-12">
+			<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-lg text-brand-text-secondary">
+				{authors.map((author, index) => (
+					<span class="flex items-center gap-2">
+						<span class="font-medium text-brand-text-primary">{author.name}</span>
+						<span class="text-sm text-brand-text-secondary">{author.affiliation}</span>
+						{index < authors.length - 1 && <span class="hidden sm:inline">·</span>}
+					</span>
+				))}
+			</div>
+		</div>
+
+		<!-- Links/Buttons -->
+		<div class="flex flex-wrap justify-center gap-4">
+			<ButtonLink href={links.paper} icon="document" variant="secondary" label="Paper" />
+			<ButtonLink href={links.code} icon="code" variant="secondary" label="Code" />
+			<ButtonLink href={links.dataset} icon="database" variant="secondary" label="Dataset" />
+			<ButtonLink href={links.cacheBaseline} icon="cache" variant="secondary" label="Cache (Baseline)" />
+			<ButtonLink href={links.cacheFull} icon="cache" variant="secondary" label="Cache (Full)" />
+		</div>
+	</div>
+</section>

@@ -1,0 +1,11 @@
+---
+import { footerLines } from "../content/site.config";
+---
+
+<footer class="border-t border-brand-border bg-brand-surface/50 backdrop-blur-sm">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+		<div class="text-center space-y-2 text-brand-text-secondary text-sm">
+			{footerLines.map((line) => <p>{line}</p>)}
+		</div>
+	</div>
+</footer>

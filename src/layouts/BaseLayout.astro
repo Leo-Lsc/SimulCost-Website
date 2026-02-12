@@ -1,0 +1,97 @@
+---
+import { siteTitle, siteSubtitle } from "../content/site.config";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = siteTitle, description = siteSubtitle } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Open Graph / Social Media -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+
+		<title>{title}</title>
+
+		<style is:global>
+			/* Font stack - system fonts for performance */
+			html {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto',
+					'Helvetica Neue', Arial, sans-serif;
+				scroll-behavior: smooth;
+			}
+
+			/* Scroll margin for sticky navbar */
+			section {
+				scroll-margin-top: 96px;
+			}
+
+			/* Reduced motion support */
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+
+				*,
+				*::before,
+				*::after {
+					animation-duration: 0.01ms !important;
+					animation-iteration-count: 1 !important;
+					transition-duration: 0.01ms !important;
+				}
+			}
+
+			/* Custom scrollbar for webkit browsers */
+			::-webkit-scrollbar {
+				width: 10px;
+			}
+
+			::-webkit-scrollbar-track {
+				background: #0B1020;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background: #243055;
+				border-radius: 5px;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background: #22D3EE;
+			}
+		</style>
+	</head>
+	<body class="bg-brand-bg text-brand-text-primary antialiased">
+		<!-- Background effects -->
+		<div class="fixed inset-0 -z-10 overflow-hidden">
+			<!-- Gradient background -->
+			<div class="absolute inset-0 bg-gradient-to-b from-brand-bg via-brand-bg to-brand-surface"></div>
+
+			<!-- Subtle grid pattern -->
+			<div
+				class="absolute inset-0 opacity-20"
+				style="background-image: radial-gradient(circle, #243055 1px, transparent 1px); background-size: 24px 24px;"
+			></div>
+
+			<!-- Glow effects -->
+			<div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-accent-indigo opacity-10 rounded-full blur-3xl"></div>
+			<div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-accent-cyan opacity-10 rounded-full blur-3xl"></div>
+		</div>
+
+		<slot />
+
+		<!-- Scrollspy script -->
+		<script src="../scripts/scrollspy.ts"></script>
+	</body>
+</html>
