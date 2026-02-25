@@ -5,13 +5,13 @@ export default {
 		extend: {
 			colors: {
 				brand: {
-					bg: '#0B1020',
-					surface: '#111A33',
-					'text-primary': '#EAF0FF',
-					'text-secondary': '#A9B4D0',
-					border: '#243055',
-					'accent-cyan': '#22D3EE',
-					'accent-indigo': '#6366F1',
+					bg: '#F7FAFF',
+					surface: '#FFFFFF',
+					'text-primary': '#0B1220',
+					'text-secondary': '#445069',
+					border: '#E6ECF5',
+					'accent-cyan': '#2563EB',
+					'accent-indigo': '#14B8A6',
 				},
 			},
 		},

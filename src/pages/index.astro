@@ -11,17 +11,27 @@ import { sections, citation } from "../content/site.config";
 	<Navbar />
 	<Hero />
 
+	<!-- Overview Image -->
+	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+		<img
+			src="/images/overview_v4.webp"
+			alt="SimulCost system overview"
+			class="w-full rounded-xl border border-brand-border shadow-sm"
+			loading="lazy"
+		/>
+	</div>
+
 	<!-- About Section -->
-	<Section id="about" label="About" title="Abstract">
+	<Section id="about" label="About" title="What does SimulCost do for you?">
 		<div class="space-y-4">
 			{sections.abstract.split('\n\n').map((paragraph) => (
-				<p>{paragraph}</p>
+				<div set:html={paragraph.replace(/\n/g, '<br />')} />
 			))}
 		</div>
 	</Section>
 
 	<!-- Simulators Section -->
-	<Section id="simulators" label="Simulators" title="Simulators Covered">
+	<Section id="simulators" label="Methodology" title="How does SimulCost work?">
 		<div class="space-y-4">
 			{sections.simulators.split('\n\n').map((paragraph) => (
 				<div set:html={paragraph.replace(/\n/g, '<br />')} />
@@ -31,27 +41,45 @@ import { sections, citation } from "../content/site.config";
 
 	<!-- Results Section -->
 	<Section id="results" label="Results" title="Main Results">
-		<div class="space-y-4">
-			{sections.results.split('\n\n').map((paragraph) => (
-				<div set:html={paragraph.replace(/\n/g, '<br />')} />
+		<div class="space-y-6">
+			{sections.results.split('\n\n').slice(0, 1).map((p) => (
+				<div set:html={p.replace(/\n/g, '<br />')} />
+			))}
+			<img
+				src="/images/fig%202.webp"
+				alt="Figure 2: Success rate and cost efficiency in single-round and multi-round modes"
+				class="w-full rounded-xl border border-brand-border shadow-sm"
+				loading="lazy"
+			/>
+			{sections.results.split('\n\n').slice(1, 2).map((p) => (
+				<div set:html={p.replace(/\n/g, '<br />')} />
+			))}
+			<img
+				src="/images/fig%203.webp"
+				alt="Figure 3: Accuracy-level effects, parameter-group effects, transfer limits, and ICL trade-offs"
+				class="w-full rounded-xl border border-brand-border shadow-sm"
+				loading="lazy"
+			/>
+			{sections.results.split('\n\n').slice(2).map((p) => (
+				<div set:html={p.replace(/\n/g, '<br />')} />
 			))}
 		</div>
 	</Section>
 
 	<!-- Findings Section -->
 	<Section id="findings" label="Findings" title="Key Findings">
-		<div class="space-y-4">
-			{sections.findings.split('\n\n').map((paragraph) => (
-				<div set:html={paragraph.replace(/\n/g, '<br />')} />
+		<ul class="space-y-2 list-disc list-outside pl-5">
+			{sections.findings.split('\n').filter((l) => l.startsWith('- ')).map((l) => (
+				<li set:html={l.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
 			))}
-		</div>
+		</ul>
 	</Section>
 
 	<!-- Conclusions Section -->
 	<Section id="conclusions" label="Conclusions" title="Conclusions">
 		<div class="space-y-4">
 			{sections.conclusions.split('\n\n').map((paragraph) => (
-				<p>{paragraph}</p>
+				<div set:html={paragraph.replace(/\n/g, '<br />')} />
 			))}
 		</div>
 	</Section>

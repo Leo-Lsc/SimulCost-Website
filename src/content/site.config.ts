@@ -28,7 +28,7 @@ export const links = {
 // Navigation items
 export const navItems = [
 	{ label: "About", href: "#about", sectionTitle: "Abstract" },
-	{ label: "Simulators", href: "#simulators", sectionTitle: "Simulators Covered" },
+	{ label: "Methodology", href: "#simulators", sectionTitle: "How does SimulCost work?" },
 	{ label: "Results", href: "#results", sectionTitle: "Main Results" },
 	{ label: "Findings", href: "#findings", sectionTitle: "Key Findings" },
 	{ label: "Conclusions", href: "#conclusions", sectionTitle: "Conclusions" },
@@ -37,46 +37,33 @@ export const navItems = [
 
 // Section content (placeholder text - replace with actual content)
 export const sections = {
-	abstract: `SimulCost is a comprehensive benchmark designed to evaluate the performance and cost-effectiveness of Large Language Models (LLMs) in automating physics simulations. This research addresses the critical need for understanding both the capabilities and economic implications of using LLMs for scientific computing tasks.
+	abstract: `SimulCost takes as input a physics simulation task with an accuracy requirement and evaluates how well an LLM can choose tunable parameters that <strong>balance solution quality and computational cost</strong>. First and foremost, SimulCost is a benchmark and toolkit for cost-aware evaluation, designed to help researchers and practitioners measure whether a model is not only correct, but also efficient. Instead of treating tool use as "free," SimulCost explicitly tracks simulation cost (primarily through platform-independent FLOP-based cost accounting) and evaluates both success rate and computational efficiency.
 
-Our benchmark covers a diverse range of physics simulation environments, from classical mechanics to computational fluid dynamics, providing a holistic assessment of LLM performance across different domains and complexity levels.`,
+It provides a standardized testbed spanning <strong>12 simulators</strong>, <strong>3 domains</strong> (fluid dynamics, solid mechanics, and plasma physics), <strong>3 accuracy levels</strong>, and <strong>4,816 tasks</strong>, including both single-round (initial guess) and multi-round (trial-and-error) tuning settings. Beyond static benchmarking, SimulCost also includes an extensible toolkit with solver libraries and standardized interfaces, so you can reproduce results, compare methods (including scan and Bayesian optimization baselines), and build new simulation environments. SimulCost is not meant to replace domain expertise—it is meant to make cost-awareness measurable, comparable, and improvable for LLM-based scientific agents.`,
 
-	simulators: `Our benchmark encompasses a carefully curated selection of physics simulation environments that represent diverse computational challenges and domain-specific requirements. These simulators span multiple physics domains including:
+	simulators: `SimulCost organizes cost-aware evaluation into four components: dataset curation, solver playground/task construction, LLM inference, and evaluation. In curation, domain experts build or adapt solvers, generate reference solutions with scan-based search, create task variants under different accuracy requirements, and filter out invalid or infeasible cases. In the solver playground, each task asks the model to tune one cost-sensitive parameter while keeping other settings fixed, which makes comparisons controlled and reproducible. SimulCost measures simulation cost primarily with solver-specific FLOP accounting (with limited exceptions), rather than treating tool calls as free.
 
-- Classical mechanics and rigid body dynamics
-- Fluid dynamics and computational fluid dynamics (CFD)
-- Electromagnetic simulations
-- Particle physics and molecular dynamics
-- Thermal and heat transfer simulations
+To test tuning behavior, SimulCost supports both single-round and multi-round inference. Single-round evaluates the model's one-shot parameter choice, while multi-round allows iterative trial-and-error with simulator feedback and accumulated cost tracking. Performance is then assessed with success rate and cost efficiency relative to a scan-based reference, and compared against baselines such as brute-force scanning and Bayesian optimization to reveal strengths, weaknesses, and opportunities for improvement.`,
 
-Each simulator has been selected to test different aspects of LLM reasoning, code generation, and parameter optimization capabilities.`,
+	results: `SimulCost reveals a consistent gap between task success and cost-efficient tuning. In single-round mode, frontier LLMs achieve only moderate reliability (46–64% success overall), and performance drops markedly under stricter accuracy requirements. Multi-round interaction improves success substantially (roughly 71–80%), but most models still spend significantly more simulation budget than simple algorithmic search.
 
-	results: `The evaluation results demonstrate significant insights into LLM performance across different simulation tasks. Key metrics include:
+This gap is most visible in efficiency. In single-round mode, models typically use 2–6× the compute of near-optimal reference solutions. In multi-round mode, success improves, but most models remain around 1.5–2.5× the cost of brute-force scanning (with only limited cases approaching parity). In practice, this means multi-round LLM tuning is often useful for recovering from poor initial guesses, but not yet a cost-efficient replacement for systematic search.
 
-- Success rate in generating valid simulation code
-- Accuracy of simulation outputs compared to ground truth
-- Computational cost and API usage
-- Time to solution across different model sizes
+Figure 3(a) shows where multi-round helps most: the gain is strongest at high accuracy requirements (mean improvement +28.9% across models), exactly where one-shot guessing fails because the acceptable parameter range becomes much narrower. Lower-accuracy tasks also improve, but less dramatically. This makes multi-round interaction increasingly necessary as precision requirements tighten.
 
-Our findings reveal substantial variation in performance across different simulation types, with certain domains proving more challenging for current LLMs than others. The cost-aware analysis provides crucial insights for practitioners considering LLM adoption for scientific computing workflows.`,
+Figures 3(b–c) and 3(d) show that performance depends strongly on the parameter being tuned, and that this difficulty is often task-specific rather than parameter-type-general. Single-round performance varies widely across parameter groups, while multi-round interaction compresses that gap and especially boosts harder, solver-specific parameters (the "Misc" group). At the same time, within-group task correlations are not stronger than between-group correlations, suggesting limited transfer from "easy/cheap" simulators to "hard/expensive" ones.
 
-	findings: `Through extensive experimentation, we have identified several critical insights:
+Figures 3(e–f) further show a trade-off in in-context learning (ICL): examples can improve single-round success, but often hurt multi-round exploration by anchoring the model to demonstrated regimes. Cost-aware examples preserve efficiency better than cost-ignorant ones, indicating that exposing cost information—not just successful settings—is important for better tuning behavior.`,
 
-1. **Task Complexity Matters**: Performance varies significantly based on simulation complexity, with simpler tasks showing near-perfect accuracy while complex multi-physics simulations remain challenging.
+	findings: `- **Success is not the same as efficiency.** Multi-round interaction improves task completion, but most models still spend substantially more simulation budget than simple search-based baselines. This is the central gap SimulCost exposes.
+- **High-accuracy tasks are the real bottleneck.** Multi-round tuning helps most when accuracy requirements are strict, where acceptable parameter regions become narrow and one-shot guesses fail more often.
+- **Tuning difficulty is highly simulator-specific.** Performance varies by parameter group, but transfer across tasks is limited; being good on one family of simulators does not reliably generalize to others.
+- **Cost-aware prompting matters.** In-context examples can improve one-shot tuning, but may hurt multi-round exploration by anchoring the model. Including cost information is more helpful than showing successful settings alone.
+- **More reasoning is not a guaranteed fix.** Increasing reasoning effort does not consistently improve tuning quality, suggesting the bottleneck is not just "thinking longer."`,
 
-2. **Cost-Performance Trade-offs**: Larger models do not always justify their higher cost, particularly for well-defined simulation tasks where smaller models achieve comparable accuracy.
+	conclusions: `SimulCost makes one point explicit: for scientific agents, correctness alone is an incomplete metric. A model may solve more tasks, yet still be impractical if it consumes too much simulation budget. By evaluating success and cost together, SimulCost surfaces the trade-offs that matter in real simulation workflows.
 
-3. **Domain-Specific Patterns**: Certain physics domains (e.g., classical mechanics) are more amenable to LLM automation than others (e.g., turbulent flow simulations).
-
-4. **Prompt Engineering Impact**: Careful prompt design significantly affects both success rate and cost, with structured prompts outperforming free-form instructions.
-
-These findings provide actionable guidance for researchers and practitioners working at the intersection of AI and scientific computing.`,
-
-	conclusions: `SimulCost establishes a foundational benchmark for evaluating LLMs in physics simulation automation, providing both performance metrics and cost awareness that are essential for practical deployment.
-
-Our work demonstrates that while current LLMs show promise in automating certain classes of physics simulations, significant challenges remain in handling complex, multi-physics scenarios. The cost-aware perspective introduced by SimulCost is crucial for making informed decisions about LLM adoption in scientific workflows.
-
-Future work should focus on developing specialized models for scientific computing, improving few-shot learning capabilities, and reducing computational costs while maintaining accuracy. We hope SimulCost will serve as a valuable resource for the community to track progress and identify areas for improvement.`,
+The strongest near-term use case is not replacing optimization routines, but combining them with LLMs: use LLMs for initialization, guidance, and orchestration, and rely on robust search/optimization methods when efficiency or reliability is critical. SimulCost provides the benchmark and toolkit foundation for building and evaluating this next generation of cost-aware scientific agents.`,
 };
 
 // Citation (replace with actual BibTeX)

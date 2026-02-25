@@ -15,7 +15,7 @@ The website is automatically deployed to GitHub Pages via GitHub Actions:
 - **Sticky navbar** with active section highlighting (scrollspy)
 - **Mobile-responsive** with hamburger menu
 - **Citation copy-to-clipboard** functionality
-- **Modern academic design** with Indigo Slate + Cyan color scheme
+- **Modern academic design** with Light Academic + Blue color scheme
 - **Accessible** with keyboard navigation and reduced-motion support
 - **Automated deployment** via GitHub Actions
 
@@ -623,7 +623,7 @@ All colors are accessed via Tailwind classes with the `brand-` prefix:
 
 ### Switching Palettes
 
-**Current**: Palette A (Indigo Slate + Cyan)
+**Current**: Palette C (Light Academic + Blue)
 
 **Step 1**: Choose a palette from `src/content/site.config.ts` (see comments at bottom)
 
@@ -637,13 +637,13 @@ export default {
       colors: {
         brand: {
           // Copy values from chosen palette
-          bg: '#0B1020',
-          surface: '#111A33',
-          'text-primary': '#EAF0FF',
-          'text-secondary': '#A9B4D0',
-          border: '#243055',
-          'accent-cyan': '#22D3EE',
-          'accent-indigo': '#6366F1',
+          bg: '#F7FAFF',
+          surface: '#FFFFFF',
+          'text-primary': '#0B1220',
+          'text-secondary': '#445069',
+          border: '#E6ECF5',
+          'accent-cyan': '#2563EB',
+          'accent-indigo': '#14B8A6',
         },
       },
     },
@@ -659,7 +659,7 @@ npm run preview
 
 ### Available Palettes
 
-**Palette A (Default)** - Indigo Slate + Cyan
+**Palette A** - Indigo Slate + Cyan
 - Best for: Tech projects, benchmarks, ML/AI research
 - Vibe: Professional, modern, high-end
 
@@ -667,7 +667,7 @@ npm run preview
 - Best for: Creative projects, design showcases
 - Vibe: Warm, approachable, contemporary
 
-**Palette C** - Light Academic + Blue
+**Palette C (Current)** - Light Academic + Blue
 - Best for: Traditional academic papers, documentation
 - Vibe: Clean, readable, classic
 
@@ -751,7 +751,7 @@ SimulCost-Website/
 │                                   # Integrations: Tailwind CSS
 │
 ├── tailwind.config.mjs             # Tailwind CSS configuration
-│                                   # Defines: brand colors (Palette A)
+│                                   # Defines: brand colors (Palette C)
 │                                   # Content: src/**/*.{astro,ts,tsx}
 │                                   # Extend: custom color tokens
 │
@@ -854,7 +854,7 @@ export const links = {
 export const navItems = [
   { label: "About", href: "#about", sectionTitle: "Abstract" },
   { label: "Results", href: "#results", sectionTitle: "Main Results" },  // Moved up
-  { label: "Simulators", href: "#simulators", sectionTitle: "Simulators Covered" },  // Moved down
+  { label: "Methodology", href: "#simulators", sectionTitle: "How does SimulCost work?" },  // Moved down
   // ... rest
 ];
 ```
@@ -1406,5 +1406,5 @@ Now that you understand the architecture, here are next steps:
 
 ---
 
-*Last updated: 2026-02-12*
+*Last updated: 2026-02-25*
 *Template version: 1.0.0*
