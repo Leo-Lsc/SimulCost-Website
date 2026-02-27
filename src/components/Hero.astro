@@ -1,5 +1,5 @@
 ---
-import { siteTitle, siteSubtitle, authors, links } from "../content/site.config";
+import { siteTitle, siteSubtitle, authors, affiliations, links } from "../content/site.config";
 import ButtonLink from "./ButtonLink.astro";
 ---
 
@@ -19,16 +19,34 @@ import ButtonLink from "./ButtonLink.astro";
 		</div>
 
 		<!-- Authors -->
-		<div class="text-center mb-12">
-			<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-lg text-brand-text-secondary">
-				{authors.map((author, index) => (
-					<span class="flex items-center gap-2">
-						<span class="font-medium text-brand-text-primary">{author.name}</span>
-						<span class="text-sm text-brand-text-secondary">{author.affiliation}</span>
-						{index < authors.length - 1 && <span class="hidden sm:inline">·</span>}
-					</span>
-				))}
-			</div>
+		<div class="text-center mb-4 space-y-1">
+			{[
+				{ row: authors.slice(0, 4),  offset: 0  },
+				{ row: authors.slice(4, 9),  offset: 4  },
+				{ row: authors.slice(9, 14), offset: 9  },
+				{ row: authors.slice(14),    offset: 14 },
+			].map(({ row, offset }) => (
+				<div class="flex flex-wrap justify-center gap-x-5 gap-y-1 text-base text-brand-text-primary">
+					{row.map((author, i) => (
+						<span>
+							<span class="font-medium">{author.name}</span>
+							{author.coFirst && <sup class="text-brand-accent-cyan font-semibold">†</sup>}
+							{author.affiliationIndices.map(n => (
+								<sup class="text-brand-text-secondary">{n}</sup>
+							))}
+							{(offset + i) < authors.length - 1 && <span class="text-brand-text-secondary">,</span>}
+						</span>
+					))}
+				</div>
+			))}
+		</div>
+
+		<!-- Legend -->
+		<div class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm text-brand-text-secondary mb-8">
+			<span><sup class="text-brand-accent-cyan font-semibold">†</sup> Equal contribution</span>
+			{affiliations.map(aff => (
+				<span><sup>{aff.index}</sup> {aff.name}</span>
+			))}
 		</div>
 
 		<!-- Links/Buttons -->

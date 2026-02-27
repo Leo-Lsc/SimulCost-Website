@@ -11,9 +11,30 @@ export const siteSubtitle = "A Cost-Aware Benchmark for Automating Physics Simul
 
 // Authors and affiliations
 export const authors = [
-	{ name: "Author A", affiliation: "UC San Diego" },
-	{ name: "Author B", affiliation: "UC San Diego" },
-	{ name: "Author C", affiliation: "UC San Diego" },
+	{ name: "Yadi Cao",            coFirst: true,  affiliationIndices: [1] },
+	{ name: "Sicheng Lai",         coFirst: true,  affiliationIndices: [2] },
+	{ name: "Jiahe Huang",         coFirst: true,  affiliationIndices: [1] },
+	{ name: "Yang Zhang",          coFirst: true,  affiliationIndices: [3] },
+	{ name: "Zach Lawrence",       coFirst: true,  affiliationIndices: [1] },
+	{ name: "Rohan Bhakta",        coFirst: true,  affiliationIndices: [1] },
+	{ name: "Izzy F. Thomas",      coFirst: true,  affiliationIndices: [1] },
+	{ name: "Mingyun Cao",         coFirst: true,  affiliationIndices: [4] },
+	{ name: "Chung-Hao Tsai",      coFirst: false, affiliationIndices: [1] },
+	{ name: "Zihao Zhou",          coFirst: false, affiliationIndices: [1] },
+	{ name: "Yidong Zhao",         coFirst: false, affiliationIndices: [6] },
+	{ name: "Hao Liu",             coFirst: false, affiliationIndices: [5] },
+	{ name: "Alessandro Marinoni", coFirst: false, affiliationIndices: [1] },
+	{ name: "Alexey Arefiev",      coFirst: false, affiliationIndices: [1] },
+	{ name: "Rose Yu",             coFirst: false, affiliationIndices: [1] },
+];
+
+export const affiliations = [
+	{ index: 1, name: "University of California San Diego" },
+	{ index: 2, name: "The Chinese University of Hong Kong, Shenzhen" },
+	{ index: 3, name: "Peking University" },
+	{ index: 4, name: "University of California, Los Angeles" },
+	{ index: 5, name: "California Institute of Technology" },
+	{ index: 6, name: "ETH Zurich" },
 ];
 
 // External links (replace '#' with actual URLs)
