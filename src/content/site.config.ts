@@ -113,7 +113,7 @@ The strongest near-term use case isn't replacing optimization routines — it's 
 // Citation (replace with actual BibTeX)
 export const citation = `@article{cao2026simulcost,
   title   = {SimulCost: A Cost-Aware Benchmark for Automating Physics Simulations with LLMs},
-  author  = {Yadi Cao and Sicheng Lai and Jiahe Huang and Yang Zhang and Zach Lawrence and Rohan Bhakta and Izzy F. Thomas and Mingyun Cao and Chung-Hao Tsai and Zihao Zhou and Yidong Zhao and Hao Liu and Alessandro Marinoni and Alexey Arefiev and Rose Yu},
+  author  = {Cao, Y. and Lai, S. and Huang, J. and Zhang, Y. and Lawrence, Z. and Bhakta, R. and Thomas, I. F. and Cao, M. and Tsai, C.-H. and Zhou, Z. and Zhao, Y. and Liu, H. and Marinoni, A. and Arefiev, A. and Yu, R.},
   journal = {arXiv preprint arXiv:XXXX.XXXXX},
   year    = {2026}
 }`;
