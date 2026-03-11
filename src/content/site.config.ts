@@ -41,10 +41,10 @@ export const affiliations = [
 export const links = {
 	paper: "#",
 	code: "https://github.com/Rose-STL-Lab/SimulCost-Bench",
-	tools: "https://github.com/Eydcao/costsci-tools",
-	dataset: "#",
-	cacheBaseline: "#",
-	cacheFull: "#",
+	tools: "https://github.com/Eydcao/simulcost-tools",
+	dataset: "https://huggingface.co/datasets/Rose-STL-Lab/SimulCost-Bench",
+	cacheBaseline: "https://huggingface.co/datasets/LeoLai689/SimulCost-baseline-sim_res",
+	cacheFull: "https://huggingface.co/datasets/LeoLai689/SimulCost-full-sim_res",
 };
 
 // Navigation items

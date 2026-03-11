@@ -4,13 +4,6 @@
 
 This repository contains the project website for SimulCost, hosted via GitHub Pages.
 
-## Links
-
-- **Live Site**: [https://rose-stl-lab.github.io/SimulCost-Website/](https://rose-stl-lab.github.io/SimulCost-Website/)
-- **Benchmark Repo**: [https://github.com/Rose-STL-Lab/SimulCost-Bench](https://github.com/Rose-STL-Lab/SimulCost-Bench)
-- **Tools Repo**: [https://github.com/Eydcao/costsci-tools](https://github.com/Eydcao/costsci-tools)
-- **Paper**: TBD
-
 ## Development
 
 ```bash
