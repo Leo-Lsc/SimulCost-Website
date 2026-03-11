@@ -5,6 +5,8 @@ import Hero from "../components/Hero.astro";
 import Section from "../components/Section.astro";
 import Footer from "../components/Footer.astro";
 import { sections, citation } from "../content/site.config";
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout>
@@ -14,7 +16,7 @@ import { sections, citation } from "../content/site.config";
 	<!-- Overview Image -->
 	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
 		<img
-			src="/images/overview_v4.webp"
+			src={`${base}images/overview_v4.webp`}
 			alt="SimulCost system overview"
 			class="w-full rounded-xl border border-brand-border shadow-sm"
 			loading="lazy"
@@ -46,7 +48,7 @@ import { sections, citation } from "../content/site.config";
 				<div set:html={p.replace(/\n/g, '<br />')} />
 			))}
 			<img
-				src="/images/fig%202.webp"
+				src={`${base}images/fig2.webp`}
 				alt="Figure 2: Success rate and cost efficiency in single-round and multi-round modes"
 				class="w-full rounded-xl border border-brand-border shadow-sm"
 				loading="lazy"
@@ -55,7 +57,7 @@ import { sections, citation } from "../content/site.config";
 				<div set:html={p.replace(/\n/g, '<br />')} />
 			))}
 			<img
-				src="/images/fig%203.webp"
+				src={`${base}images/fig3.webp`}
 				alt="Figure 3: Accuracy-level effects, parameter-group effects, transfer limits, and ICL trade-offs"
 				class="w-full rounded-xl border border-brand-border shadow-sm"
 				loading="lazy"
@@ -70,6 +72,24 @@ import { sections, citation } from "../content/site.config";
 	<Section id="findings" label="Findings" title="Key Findings">
 		<ul class="space-y-2 list-disc list-outside pl-5">
 			{sections.findings.split('\n').filter((l) => l.startsWith('- ')).map((l) => (
+				<li set:html={l.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
+			))}
+		</ul>
+	</Section>
+
+	<!-- Takeaways Section -->
+	<Section id="takeaways" label="Takeaways" title="Practical Takeaways">
+		<ul class="space-y-2 list-disc list-outside pl-5">
+			{sections.takeaways.split('\n').filter((l) => l.startsWith('- ')).map((l) => (
+				<li set:html={l.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
+			))}
+		</ul>
+	</Section>
+
+	<!-- Future Directions Section -->
+	<Section id="future" label="Future" title="What's Next?">
+		<ul class="space-y-2 list-disc list-outside pl-5">
+			{sections.future.split('\n').filter((l) => l.startsWith('- ')).map((l) => (
 				<li set:html={l.slice(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
 			))}
 		</ul>
