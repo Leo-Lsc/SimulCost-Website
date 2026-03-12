@@ -1,9 +1,9 @@
 /**
  * Scrollspy - Highlights active navigation item based on scroll position
  *
- * Uses native browser anchor navigation (no JavaScript scrolling) to avoid
- * race conditions with the IntersectionObserver. Each section independently
- * manages its own nav link active state.
+ * Uses native browser anchor navigation (CSS scroll-behavior: smooth) to
+ * avoid race conditions. Tracks all intersecting sections and highlights
+ * only the bottom-most one to guarantee a single active nav link.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,18 +12,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	if (sections.length === 0 || navLinks.length === 0) return;
 
+	const intersecting = new Set<string>();
+
 	const observer = new IntersectionObserver(
 		(entries) => {
 			entries.forEach((entry) => {
-				const id = entry.target.id;
-				const links = document.querySelectorAll(`.nav-link[data-section="${id}"]`);
-				links.forEach((link) => {
-					if (entry.isIntersecting) {
-						link.classList.add('active');
-					} else {
-						link.classList.remove('active');
-					}
-				});
+				if (entry.isIntersecting) {
+					intersecting.add(entry.target.id);
+				} else {
+					intersecting.delete(entry.target.id);
+				}
+			});
+
+			// Pick the bottom-most intersecting section (last in DOM order)
+			let activeId: string | null = null;
+			sections.forEach((section) => {
+				if (intersecting.has(section.id)) {
+					activeId = section.id;
+				}
+			});
+
+			navLinks.forEach((link) => {
+				const linkSection = link.getAttribute('data-section');
+				if (linkSection === activeId) {
+					link.classList.add('active');
+				} else {
+					link.classList.remove('active');
+				}
 			});
 		},
 		{
