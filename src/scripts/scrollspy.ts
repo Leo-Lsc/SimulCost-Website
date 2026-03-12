@@ -17,7 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	let activeSection: string | null = null;
 
+	// Lock observer updates during programmatic scrolls to prevent
+	// intermediate sections from hijacking the active highlight.
+	let isScrollingFromClick = false;
+	let scrollEndFallbackTimer: ReturnType<typeof setTimeout> | null = null;
+
+	function unlockObserver() {
+		isScrollingFromClick = false;
+		if (scrollEndFallbackTimer !== null) {
+			clearTimeout(scrollEndFallbackTimer);
+			scrollEndFallbackTimer = null;
+		}
+	}
+
 	const observer = new IntersectionObserver((entries) => {
+		if (isScrollingFromClick) return;
+
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
 				activeSection = entry.target.id;
@@ -53,6 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
 				const targetSection = document.getElementById(targetId);
 
 				if (targetSection) {
+					// Lock observer before starting the scroll
+					isScrollingFromClick = true;
+
+					// Clear any pending unlock from a previous rapid click
+					if (scrollEndFallbackTimer !== null) {
+						clearTimeout(scrollEndFallbackTimer);
+					}
+
+					// Update active state immediately
+					updateActiveNav(targetId);
+
 					// Smooth scroll to section
 					targetSection.scrollIntoView({
 						behavior: 'smooth',
@@ -62,8 +88,19 @@ document.addEventListener('DOMContentLoaded', () => {
 					// Update URL without scrolling
 					history.replaceState(null, '', href);
 
-					// Update active state immediately
-					updateActiveNav(targetId);
+					// Unlock observer when scroll finishes
+					const onScrollEnd = () => {
+						unlockObserver();
+						window.removeEventListener('scrollend', onScrollEnd);
+					};
+					window.addEventListener('scrollend', onScrollEnd, { once: true });
+
+					// Fallback: unlock after 1s for browsers without scrollend
+					// or when the section is already in view (no scroll occurs)
+					scrollEndFallbackTimer = setTimeout(() => {
+						unlockObserver();
+						window.removeEventListener('scrollend', onScrollEnd);
+					}, 1000);
 				}
 			}
 		});
