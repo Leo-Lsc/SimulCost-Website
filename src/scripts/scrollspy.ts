@@ -1,9 +1,12 @@
 /**
  * Scrollspy - Highlights active navigation item based on scroll position
  *
- * Uses native browser anchor navigation (CSS scroll-behavior: smooth) to
- * avoid race conditions. Tracks all intersecting sections and highlights
- * only the bottom-most one to guarantee a single active nav link.
+ * Uses a Set-based IntersectionObserver that tracks all intersecting sections
+ * and highlights only the bottom-most one to guarantee a single active nav link.
+ *
+ * Click handler uses scrollIntoView() for reliable element targeting without
+ * any scroll locking — the Set-based observer is self-correcting and always
+ * converges to the correct active section when scrolling completes.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -48,4 +51,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	);
 
 	sections.forEach((section) => observer.observe(section));
+
+	// Click handler: scrollIntoView for reliable targeting, no locking needed
+	navLinks.forEach((link) => {
+		link.addEventListener('click', (e) => {
+			const href = link.getAttribute('href');
+			if (!href || !href.startsWith('#')) return;
+
+			e.preventDefault();
+
+			const targetId = href.substring(1);
+			const target = document.getElementById(targetId);
+			if (!target) return;
+
+			target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			history.replaceState(null, '', href);
+		});
+	});
 });

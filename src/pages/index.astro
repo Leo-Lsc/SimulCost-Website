@@ -20,6 +20,8 @@ const base = import.meta.env.BASE_URL;
 			alt="SimulCost system overview"
 			class="w-full rounded-xl border border-brand-border shadow-sm"
 			loading="lazy"
+			width="3358"
+			height="1113"
 		/>
 	</div>
 
@@ -52,6 +54,8 @@ const base = import.meta.env.BASE_URL;
 				alt="Figure 2: Success rate and cost efficiency in single-round and multi-round modes"
 				class="w-full rounded-xl border border-brand-border shadow-sm"
 				loading="lazy"
+				width="2906"
+				height="1058"
 			/>
 			{sections.results.split('\n\n').slice(1, 2).map((p) => (
 				<div set:html={p.replace(/\n/g, '<br />')} />
@@ -61,6 +65,8 @@ const base = import.meta.env.BASE_URL;
 				alt="Figure 3: Accuracy-level effects, parameter-group effects, transfer limits, and ICL trade-offs"
 				class="w-full rounded-xl border border-brand-border shadow-sm"
 				loading="lazy"
+				width="2904"
+				height="1668"
 			/>
 			{sections.results.split('\n\n').slice(2).map((p) => (
 				<div set:html={p.replace(/\n/g, '<br />')} />
