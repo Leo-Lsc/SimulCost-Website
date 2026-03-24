@@ -111,18 +111,21 @@ The strongest near-term use case isn't replacing optimization routines — it's 
 };
 
 // Citation (replace with actual BibTeX)
-export const citation = `@article{cao2026simulcost,
-  title   = {SimulCost: A Cost-Aware Benchmark for Automating Physics Simulations with LLMs},
-  author  = {Cao, Y. and Lai, S. and Huang, J. and Zhang, Y. and Lawrence, Z. and Bhakta, R. and Thomas, I. F. and Cao, M. and Tsai, C.-H. and Zhou, Z. and Zhao, Y. and Liu, H. and Marinoni, A. and Arefiev, A. and Yu, R.},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
-  year    = {2026}
+export const citation = `@misc{cao2026simulcostcostawarebenchmarktoolkit,
+      title={SimulCost: A Cost-Aware Benchmark and Toolkit for Automating Physics Simulations with LLMs},
+      author={Yadi Cao and Sicheng Lai and Jiahe Huang and Yang Zhang and Zach Lawrence and Rohan Bhakta and Izzy F. Thomas and Mingyun Cao and Chung-Hao Tsai and Zihao Zhou and Yidong Zhao and Hao Liu and Alessandro Marinoni and Alexey Arefiev and Rose Yu},
+      year={2026},
+      eprint={2603.20253},
+      archivePrefix={arXiv},
+      primaryClass={physics.comp-ph},
+      url={https://arxiv.org/abs/2603.20253},
 }`;
 
 // Footer content (exact three lines as specified)
 export const footerLines = [
 	"We are grateful to our supporters.",
 	"© 2026. UCSD Rose Spatiotemporal Machine Learning Lab.",
-	"Designed by Sicheng Leo Lai.",
+	'Designed by <a href="https://sichenglai.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-brand-text-primary transition-colors">Sicheng Leo Lai</a>.',
 ];
 
 /**
