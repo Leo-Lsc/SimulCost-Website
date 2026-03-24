@@ -39,7 +39,7 @@ export const affiliations = [
 
 // External links (replace '#' with actual URLs)
 export const links = {
-	paper: "#",
+	paper: "https://arxiv.org/abs/2603.20253",
 	code: "https://github.com/Rose-STL-Lab/SimulCost-Bench",
 	tools: "https://github.com/Eydcao/simulcost-tools",
 	dataset: "https://huggingface.co/datasets/Rose-STL-Lab/SimulCost-Bench",
