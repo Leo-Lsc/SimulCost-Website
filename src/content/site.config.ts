@@ -125,7 +125,7 @@ export const citation = `@misc{cao2026simulcostcostawarebenchmarktoolkit,
 export const footerLines = [
 	"We are grateful to our supporters.",
 	"© 2026. UCSD Rose Spatiotemporal Machine Learning Lab.",
-	'Designed by <a href="https://sichenglai.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-brand-text-primary transition-colors">Sicheng Leo Lai</a>.',
+	'Designed by <a href="https://sichenglai.com/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-text-primary transition-colors">Sicheng Leo Lai</a>.',
 ];
 
 /**

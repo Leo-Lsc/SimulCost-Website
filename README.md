@@ -18,11 +18,14 @@ Website content is configured in `src/content/site.config.ts`.
 ## Citation
 
 ```bibtex
-@article{cao2026simulcost,
-  title   = {SimulCost: A Cost-Aware Benchmark for Automating Physics Simulations with LLMs},
-  author  = {Cao, Y. and Lai, S. and Huang, J. and Zhang, Y. and Lawrence, Z. and Bhakta, R. and Thomas, I. F. and Cao, M. and Tsai, C.-H. and Zhou, Z. and Zhao, Y. and Liu, H. and Marinoni, A. and Arefiev, A. and Yu, R.},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
-  year    = {2026}
+@misc{cao2026simulcostcostawarebenchmarktoolkit,
+      title={SimulCost: A Cost-Aware Benchmark and Toolkit for Automating Physics Simulations with LLMs},
+      author={Yadi Cao and Sicheng Lai and Jiahe Huang and Yang Zhang and Zach Lawrence and Rohan Bhakta and Izzy F. Thomas and Mingyun Cao and Chung-Hao Tsai and Zihao Zhou and Yidong Zhao and Hao Liu and Alessandro Marinoni and Alexey Arefiev and Rose Yu},
+      year={2026},
+      eprint={2603.20253},
+      archivePrefix={arXiv},
+      primaryClass={physics.comp-ph},
+      url={https://arxiv.org/abs/2603.20253},
 }
 ```
 
